@@ -3,17 +3,14 @@ import "./App.css";
 import { useState } from "react";
 
 function Header(props) {
-  console.log("props", props, props.title);
   return (
     <header>
       <h1>
-        <a
-          href="/"
+        <a href="/"
           onClick={(event) => {
             event.preventDefault();
             props.onChangeMode();
-          }}
-        >
+          }}>
           {props.title}
         </a>
       </h1>
@@ -27,9 +24,7 @@ function Nav(props) {
     let t = props.topics[i];
     list.push(
       <li key={t.id}>
-        <a
-          id={t.id}
-          href={"/read/" + t.id}
+        <a id={t.id} href={"/read/" + t.id}
           onClick={(event) => {
             event.preventDefault();
             props.onChangeMode(Number(event.target.id));
@@ -55,6 +50,7 @@ function Article(props) {
     </article>
   );
 }
+
 function Create(props) {
   return (
     <article>
@@ -130,13 +126,14 @@ function App() {
   ]);
   let content = null;
   let contextControl = null;
+
   if (mode === "Welcome") {
     content = <Article title="Welcome" body="Hello, Web"></Article>;
-  } else if (mode === "Read") {
-    let title,
-      body = null;
+  }
+
+  else if (mode === "Read") {
+    let title, body = null;
     for (let i = 0; i < topics.length; i++) {
-      console.log(topics[i].id, id);
       if (topics[i].id === id) {
         title = topics[i].title;
         body = topics[i].body;
@@ -148,12 +145,9 @@ function App() {
         onClick={(event) => {
           event.preventDefault();
           setMode("Update");
-        }}
-      >
-        Update
+        }}>Update
       </a>
       </li>
-
       <li><input type="button" value="Delete" onClick={() => {
         const newTopics = []
         for (let i = 0; i < topics.lengtj; i++) {
@@ -163,12 +157,14 @@ function App() {
         }
         setTopics(newTopics);
         setMode("Welcome")
-
-      }}></input></li>
+      }}>
+      </input>
+      </li>
     </>
+  }
 
-  } else if (mode === "CREATE") {
-    content = (
+  else if (mode === "CREATE") {
+    content =
       <Create
         onCreate={(_title, _body) => {
           const newTopic = { id: nextId, title: _title, body: _body };
@@ -179,13 +175,12 @@ function App() {
           setId(nextId);
           setNextId(nextId + 1);
         }}
-      ></Create>
-    );
-  } else if (mode === "Update") {
-    let title,
-      body = null;
+      ></Create>;
+  }
+
+  else if (mode === "Update") {
+    let title, body = null;
     for (let i = 0; i < topics.length; i++) {
-      console.log(topics[i].id, id);
       if (topics[i].id === id) {
         title = topics[i].title;
         body = topics[i].body;
@@ -204,16 +199,15 @@ function App() {
       setMode('Read');
     }}></Update>;
   }
+
   return (
     <div>
-      <Header
-        title="Web"
+      <Header title="Web"
         onChangeMode={() => {
           setMode("Welcome");
         }}
       ></Header>
-      <Nav
-        topics={topics}
+      <Nav topics={topics}
         onChangeMode={(_id) => {
           setMode("Read");
           setId(_id);
@@ -222,14 +216,11 @@ function App() {
       {content}
       <ul>
         <li>
-          <a
-            href="/create"
+          <a href="/create"
             onClick={(event) => {
               event.preventDefault();
               setMode("CREATE");
-            }}
-          >
-            Create
+            }}>Create
           </a>
         </li>
         {contextControl}
