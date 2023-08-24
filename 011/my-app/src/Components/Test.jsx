@@ -1,4 +1,4 @@
-import "./test.css";
+import style from "./test.module.css";
 export default function Test() {
-  return <div>Test</div>;
+  return <div className={style.test}>Test</div>;
 }
