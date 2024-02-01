@@ -19,7 +19,7 @@
 // console.log(f(7,0,"",false, null))
 
 /**
- * 유사 배열 객체(array - like object) : 객체인데, 각 프로퍼티의 키가 인덱스이고, length라는 프로퍼티가 있는 객체
+ * 유사 배열 객체(array - like object) : 객체인데, 각 프로퍼티의 키가 인덱스이고, length 프로퍼티가 있는 객체
  */
 
 // const a = function(a = 1, b= 2, c= 3){
