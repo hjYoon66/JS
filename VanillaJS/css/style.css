@@ -1,3 +1,54 @@
+body{
+    color: white;
+    text-align: center;
+}
+#weather{
+    font-size: 40px;
+    margin-left: 67rem;
+    margin-right: 10px;
+}
+#js-clock{
+    font-size: 75px
+}
+input #f{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+/*#login-form input{*/
+/*    border: none;*/
+/*    border-bottom: 1px solid black;*/
+/*    outline: none;*/
+/*}*/
+input:focus{
+    outline:none
+}
+input #f{
+    border: none;
+    border-width: 0 0 1px;
+}
 .hidden {
     display: none;
+}
+
+.bgImage{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: -1;
+    animation: fadeIn 0.5s linear;
+
+}
+#todo-form{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+ul{
+    list-style-type: none;
+    margin-bottom: 100px;
+}
+#quote{
+    margin-top: 200px;
 }
