@@ -1,6 +1,7 @@
 <template>
   <div class="card shadow-sm">
-    <span class="img" :style="{backgroundImage: `url(${item.imgPath})`}" />
+<!--    <span class="img" :style="{backgroundImage: `url(${item.imgPath})`}" />-->
+    <img :src="item.imgPath" />
     <div class="card-body">
       <p class="card-text">{{item.name}}</p>
       <div class="d-flex justify-content-between align-items-center">
