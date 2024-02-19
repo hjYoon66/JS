@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+    padding: 50px;
+}
+
+.num{
+    font-size: 60px;
+    padding-bottom: 40px;
+    font-weight: bold;
+}
+.btn{
+    font-size: 20px;
+    border-radius: 10px;
+}
