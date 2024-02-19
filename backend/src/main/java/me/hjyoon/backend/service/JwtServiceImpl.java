@@ -11,8 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service("jwtService")
-public class JwtServiceImpl implements JwtService{
+public class JwtServiceImpl implements JwtService {
     private String secretKey = "abbci2@!@#!@#dsfsdflerw!!#123123123123123123123321231231321231231";
+
     @Override
     public String getToken(String key, Object value) {
         Date expTime = new Date();
@@ -37,17 +38,31 @@ public class JwtServiceImpl implements JwtService{
 
     @Override
     public Claims getClaims(String token) {
-        if(token != null && !"".equals(token)){
-            try{
+        if (token != null && !"".equals(token)) {
+            try {
                 byte[] secretByteKey = DatatypeConverter.parseBase64Binary(secretKey);
                 Key signKey = new SecretKeySpec(secretByteKey, SignatureAlgorithm.HS256.getJcaName());
                 return Jwts.parserBuilder().setSigningKey(signKey).build().parseClaimsJws(token).getBody();
-            } catch(ExpiredJwtException e){
+            } catch (ExpiredJwtException e) {
                 //만료
-            } catch(JwtException e){
+            } catch (JwtException e) {
                 //유효하지 않음
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean isValid(String token) {
+        return this.getClaims(token) != null;
+    }
+
+    @Override
+    public int getId(String token) {
+        Claims claims = this.getClaims(token);
+        if (claims != null) {
+            return Integer.parseInt(claims.get("id").toString());
+        }
+        return 0;
     }
 }
