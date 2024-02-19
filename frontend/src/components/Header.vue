@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4  py-4">
-            <h4 class="text-white">사이트맵</h4>
+            <h4 class="text-white">Gallery Shoppingmall</h4>
             <ul class="list-unstyled">
               <li>
                 <router-link to="/" class="text-white">메인 화면</router-link>
@@ -24,13 +24,19 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container">
         <router-link to="/" class="navbar-brand d-flex align-items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+               stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
+               viewBox="0 0 24 24">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
           <strong>Gallery</strong>
         </router-link>
-        <router-link to="/cart" class="cart btn">
+        <router-link to="/cart" class="cart btn" v-if="$store.state.account.id">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </router-link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
@@ -41,14 +47,17 @@
 <script>
 import store from "@/scripts/store";
 import router from "@/scripts/router";
+import axios from "axios";
 
 export default {
   name: 'Header',
-  setup(){
-    const logout = ()=>{
-      store.commit('setAccount',0);
-      sessionStorage.removeItem("id")
-      router.push({path:"/"})
+  setup() {
+    const logout = () => {
+      axios.post("/api/account/logout").then(() => {
+        store.commit('setAccount', 0);
+        router.push({path: "/"})
+
+      })
     }
     return {logout}
   }
@@ -57,22 +66,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-header .navbar .cart{
+header ul li a {
+  cursor: pointer;
+}
+
+header .navbar .cart {
   margin-left: auto;
   color: white;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

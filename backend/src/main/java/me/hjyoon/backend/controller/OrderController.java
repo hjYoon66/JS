@@ -2,11 +2,13 @@ package me.hjyoon.backend.controller;
 
 import me.hjyoon.backend.dto.OrderDto;
 import me.hjyoon.backend.entity.Order;
+import me.hjyoon.backend.respository.CartRepository;
 import me.hjyoon.backend.respository.OrderRepository;
 import me.hjyoon.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -16,6 +18,8 @@ import java.util.List;
 public class OrderController {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    CartRepository cartRepository;
     @Autowired
     JwtService jwtService;
 
@@ -27,12 +31,13 @@ public class OrderController {
         if(!jwtService.isValid(token)){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-
-        List<Order> orders = orderRepository.findAll();
+        int memberId = jwtService.getId(token);
+        List<Order> orders = orderRepository.findByMemberIdOrderByIdDesc(memberId);
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
 
     }
+    @Transactional
     @PostMapping("/api/orders")
     public ResponseEntity pushOrder(
             @RequestBody OrderDto dto,
@@ -41,9 +46,10 @@ public class OrderController {
         if(!jwtService.isValid(token)){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-
+        int memberId = jwtService.getId(token);
         Order newOrder = new Order();
-        newOrder.setMemberId(jwtService.getId(token));
+
+        newOrder.setMemberId(memberId);
         newOrder.setName(dto.getName());
         newOrder.setAddress(dto.getAddress());
         newOrder.setPayment(dto.getPayment());
@@ -51,6 +57,8 @@ public class OrderController {
         newOrder.setItems(dto.getItems());
 
         orderRepository.save(newOrder);
+
+        cartRepository.deleteByMemberId(memberId);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
