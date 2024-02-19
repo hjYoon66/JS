@@ -1,11 +1,11 @@
 <template>
   <footer class="text-body-secondary py-5">
     <div class="container">
-      <p class="float-end mb-1">
-        <a href="#">Back to top</a>
+
+      <p class="mb-1">This Homepage is Vue & SpringBoot link project</p>
+      <p class="mb-0">I took a <a href="https://www.youtube.com/watch?v=htYYSszfzv0&list=WL&index=11&t=4659s">Vue 3 tutorial</a>
+        and improved the project's completeness and validity checks
       </p>
-      <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
     </div>
   </footer>
 </template>

@@ -3,9 +3,7 @@
     <div class="container">
       <main>
         <div class="py-5 text-center"><h2>주문하기</h2>
-          <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form
-            group has a validation state that can be triggered by attempting to submit the form without completing
-            it.</p></div>
+          <p class="lead">주문자 정보와 결제 수단을 통해 구입 목록들을 주문하세요!</p></div>
         <div class="row g-5">
           <div class="col-md-5 col-lg-4 order-md-last"><h4
               class="d-flex justify-content-between align-items-center mb-3">

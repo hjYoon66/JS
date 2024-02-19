@@ -11,7 +11,7 @@
       </p>
 
       <div class="d-flex justify-content-between align-items-center">
-        <button class="btn btn-primary" @click="addToCart(item.id)">
+        <button class="btn btn-primary"  @click="addToCart(item.id)" >
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </button>
         <small class="price text-body-secondary">
@@ -28,6 +28,8 @@
 <script>
 import lib from "@/scripts/lib";
 import axios from "axios";
+import store from "@/scripts/store";
+import router from "@/scripts/router";
 
 export default {
   name: 'Card',
@@ -36,10 +38,16 @@ export default {
   },
   setup() {
     const addToCart = (itemId) =>{
+      if(!store.state.account.id){
+        alert("로그인이 필요합니다.")
+        router.push({path: "/login"})
+        return
+      }
       axios.post(`/api/cart/items/${itemId}`).then(()=>{
         console.log('success')
       })
     }
+
     return {lib, addToCart}
   }
 }
