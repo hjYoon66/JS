@@ -6,4 +6,3 @@ export const mkdir = (dirname: string): Promise<string> =>
         const alreadyExists = await fileExists(dirname);
         alreadyExists ? resolve(dirname) : mkdirp(dirname).then(() => resolve(dirname)).catch(reject);
     });
-d
