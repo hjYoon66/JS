@@ -1,0 +1,16 @@
+body{
+    text-align: center;
+}
+
+.button-container{
+    height: 100px;
+    text-align: center;
+}
+.button-container .prev-btn .next-btn{
+    text-align: center;
+    width: 500px;
+    height: 10px;
+}
+button{
+    font-size: 25px;
+}
